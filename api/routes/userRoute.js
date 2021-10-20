@@ -18,6 +18,13 @@ module.exports = function(app) {
   app.route('/user/password')
     .post(user.user_change_password)
 
+  app.route('/user/forget')
+    .post(user.forget_password)
+
+  app.route('/user/reset')
+    .post(user.reset_password)
+
+  // Dest
   app.route('/dest/list')
     .get(user.dest_list)
 

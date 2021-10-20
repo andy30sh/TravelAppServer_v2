@@ -30,7 +30,7 @@ var mongoose = require('mongoose'),
       } else {
         console.log("created new user");
         console.log(new_user);
-        res.json({user_login: new_user.user_login, created_date: new_user.created_date});
+        res.json({user_login: new_user.login_id, created_date: new_user.created_date});
       }
     });
   };
@@ -61,7 +61,7 @@ var mongoose = require('mongoose'),
               console.log(result);
             }
           });
-          res.json({user_login: userId, login_token: token, last_login_date: user.last_login_date});
+          res.json({user_login: userId, login_token: token, last_login_date: result.last_login_date});
         }
       } else {
        res.json({result: 'Login fail!'});
@@ -83,12 +83,12 @@ var mongoose = require('mongoose'),
       if (user != null) {
         //console.log(user);
         let token = randtoken.generate(16).toString();
-        User.findOneAndUpdate({login_id: userId}, {status: 'normal', login_token: token, last_login_date: Date.now()}, {new: false}, 
+        User.findOneAndUpdate({login_id: userId}, {status: 'normal', login_token: token, activation_token: 'xxx', last_login_date: Date.now()}, {new: false}, 
           function(err, result) {
             if(err)
               res.send(err);
             console.log(result);
-            res.json({user_login: userId, login_token: token, last_login_date: user.last_login_date});
+            res.json({user_login: userId, login_token: token, last_login_date: result.last_login_date});
           });
       } else {
         res.json({result: 'Activate fail!'});
@@ -110,15 +110,74 @@ var mongoose = require('mongoose'),
       }
       if (user != null) {
         //console.log(user);
-        User.findOneAndUpdate({login_id: userId}, {password: newPasswd, last_login_date: Date.now()}, {new: false}, 
+        let token = randtoken.generate(16).toString();
+        User.findOneAndUpdate({login_id: userId}, {password: newPasswd, login_token: token, last_login_date: Date.now()}, {new: false}, 
           function(err, result) {
-            if(err)
+            if(err) {
               res.send(err);
-            console.log(result);
-            res.json({user_login: req.params.userId, last_login_date: user.last_login_date});
+            } else {
+              console.log(result);
+              res.json({user_login: userId, login_token: token, last_login_date: result.last_login_date});
+            }
           });
       } else {
         res.json({result: 'Change password fail!'});
+      }
+    });
+  };
+
+  exports.forget_password = function(req, res) {
+    let userId = req.body.userId;
+    let userEmail = req.body.email;
+    console.log(userId + '|' + userEmail);
+    
+    User.findOne({login_id: userId, email: userEmail, status: 'normal'}, function(err, user) {
+      if (err) {
+        res.send(err);
+      }
+      if (user != null) {
+        //console.log(user);
+        let token = randtoken.generate(16).toString();
+        User.findOneAndUpdate({login_id: userId}, {activation_token: token}, {new: false}, 
+          function(err, result) {
+            if(err) {
+              res.send(err);
+            } else {
+              console.log(result);
+              res.json({user_login: userId, status: result.status});
+            }
+          });
+      } else {
+        res.json({result: 'Incorrect login ID and email!'});
+      }
+    });
+  };
+
+  exports.reset_password = function(req, res) {
+    let userId = req.body.userId;
+    let newPasswd = req.body.newPassword;
+    let activateCode = req.body.activateCode;
+    console.log(userId + '|' + activateCode + '|' + newPasswd);
+    
+    newPasswd = MD5(newPasswd).toString();
+    User.findOne({login_id: userId, activation_token: activateCode, status: 'normal'}, function(err, user) {
+      if (err) {
+        res.send(err);
+      }
+      if (user != null) {
+        console.log(user);
+        let token = randtoken.generate(16).toString();
+        User.findOneAndUpdate({login_id: userId}, {password: newPasswd, activation_token: 'xxx', login_token: token, last_login_date: Date.now()}, {new: false}, 
+          function(err, result) {
+            if(err) {
+              res.send(err);
+            } else {
+              console.log(result);
+              res.json({user_login: userId, login_token: token, last_login_date: result.last_login_date});
+            }
+          });
+      } else {
+        res.json({result: 'Reset password fail!'});
       }
     });
   };
