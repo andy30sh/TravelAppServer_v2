@@ -1,0 +1,35 @@
+{
+  "name": "travelappserver_v2",
+  "version": "1.0.0",
+  "description": "Travel App Server (Production)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andy30sh/TravelAppServer_v2.git"
+  },
+  "keywords": [
+    "travel",
+    "app"
+  ],
+  "author": "Andy Yuen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andy30sh/TravelAppServer_v2/issues"
+  },
+  "homepage": "https://github.com/andy30sh/TravelAppServer_v2#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.11",
+    "multer": "^1.4.3",
+    "rand-token": "^1.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
