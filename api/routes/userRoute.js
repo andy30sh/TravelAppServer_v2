@@ -2,17 +2,20 @@
 module.exports = function(app) {
   var user = require('../controllers/userController');
 
-  // Users Routes
+  // Users 
   app.route('/user')
     .get(user.list_all_users)
-    .post(user.create_a_user);
 
-  
-  app.route('/user/:userId')
-    .get(user.read_a_user)
-    .post(user.user_login)
-    .put(user.update_a_user)
-  
+  app.route('/user/create')
+    .post(user.user_create);
 
+  app.route('/user/login')
+    .post(user.user_login);
+
+  app.route('/user/activate')
+    .post(user.user_activate)
+
+  app.route('/user/password')
+    .post(user.user_change_password)
 
 };

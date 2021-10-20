@@ -1,7 +1,11 @@
 'use strict';
 
+var MD5 = require('crypto-js/md5'); // hash password
+
 var mongoose = require('mongoose'),
     User = mongoose.model('Users');
+
+ // =============== User ======================
 
   exports.list_all_users = function(req, res) {
     User.find({}, function(err, user) {
@@ -11,8 +15,8 @@ var mongoose = require('mongoose'),
       res.json(user);
     });
   };
-  
-  exports.create_a_user = function(req, res) {
+ 
+  exports.user_create = function(req, res) {
     console.log(req.body);
     var new_user = new User(req.body);
     new_user.save(function(err, user) {
@@ -20,37 +24,85 @@ var mongoose = require('mongoose'),
         res.send(err);
       console.log("create new user");
       console.log(new_user);
-      res.json(user);
+      res.json({user_login: new_user.user_login, created_date: new_user.created_date});
     });
   };
-  
-  exports.read_a_user = function(req, res) {
-    console.log(req.params.userId);
-    //console.log();
-    User.findOne({login_id: req.params.userId}, function(err, user) {
-      if (err)
-        res.send(err);
-      res.json(user);
-    });
-  };
+
 
   exports.user_login = function(req, res) {
-    console.log(req.params.userId);
-    console.log(req.body.password);
-    User.findOne({login_id: req.params.userId, password: req.body.password}, function(err, user) {
-      if (err)
+    let userId = req.body.userId;
+    let userPasswd = req.body.password;
+    console.log(userId + '|' + userPasswd);
+
+    User.findOne({login_id: userId, password: userPasswd}, function(err, user) {
+      if (err) {
         res.send(err);
-      if (user != null)
-        res.json({ user_login: req.params.userId, last_login_date: user.last_login_date});
-      else
-        res.json([]);
+      }
+      if (user != null) {
+        if (user.status != 'normal') {
+          res.json({result: 'Accout not active!'});
+        } else {
+          //console.log(user);
+          User.findOneAndUpdate({login_id: userId}, {last_login_date: Date.now()}, {new: false}, 
+          function(err, result) {
+            if(err)
+              res.send(err);
+            console.log(result);
+          });
+          res.json({user_login: req.params.userId, last_login_date: user.last_login_date});
+        }
+      } else {
+        res.json({result: 'Login fail!'});
+      }
     });
   };
 
-  exports.update_a_user = function(req, res) {
-    User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
-      if (err)
+  exports.user_activate = function(req, res) {
+    let userId = req.body.userId;
+    let userPasswd = req.body.password;
+    let activateCode = req.body.activateCode;
+    console.log(userId + '|' + userPasswd + '|' + activateCode);
+    
+    User.findOne({login_id: userId, password: userPasswd, activation_token: activateCode, status: 'pending'}, function(err, user) {
+      if (err) {
         res.send(err);
-      res.json(user);
+      }
+      if (user != null) {
+        //console.log(user);
+        User.findOneAndUpdate({login_id: userId}, {status: 'normal', ast_login_date: Date.now()}, {new: false}, 
+          function(err, result) {
+            if(err)
+              res.send(err);
+            console.log(result);
+            res.json({user_login: req.params.userId, last_login_date: user.last_login_date});
+          });
+      } else {
+        res.json({result: 'Activate fail!'});
+      }
+    });
+  };
+
+  exports.user_change_password = function(req, res) {
+    let userId = req.body.userId;
+    let userPasswd = req.body.password;
+    let newPasswd = req.body.newPassword;
+    console.log(userId + '|' + userPasswd + '|' + newPasswd);
+    
+    User.findOne({login_id: userId, password: userPasswd, status: 'normal'}, function(err, user) {
+      if (err) {
+        res.send(err);
+      }
+      if (user != null) {
+        //console.log(user);
+        User.findOneAndUpdate({login_id: userId}, {password: newPasswd, ast_login_date: Date.now()}, {new: false}, 
+          function(err, result) {
+            if(err)
+              res.send(err);
+            console.log(result);
+            res.json({user_login: req.params.userId, last_login_date: user.last_login_date});
+          });
+      } else {
+        res.json({result: 'Change password fail!'});
+      }
     });
   };
