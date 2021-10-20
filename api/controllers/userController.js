@@ -1,6 +1,7 @@
 'use strict';
 
 var MD5 = require('crypto-js/md5'); // hash password
+const randtoken = require('rand-token');
 
 var mongoose = require('mongoose'),
     User = mongoose.model('Users'),
@@ -22,7 +23,7 @@ var mongoose = require('mongoose'),
     console.log(req.body);
     var new_user = new User(req.body);
 
-    new_user.password = MD5(new_user.password);
+    new_user.password = MD5(new_user.password).toString();
     new_user.save(function(err, user) {
       if (err) {
         res.send(err);
@@ -40,7 +41,8 @@ var mongoose = require('mongoose'),
     let userPasswd = req.body.password;
     console.log(userId + '|' + userPasswd);
 
-    userPasswd = MD5(userPasswd);
+    userPasswd = MD5(userPasswd).toString();
+    console.log(userPasswd);
     User.findOne({login_id: userId, password: userPasswd}, function(err, user) {
       if (err) {
         res.send(err);
@@ -50,16 +52,19 @@ var mongoose = require('mongoose'),
           res.json({result: 'Accout not active!'});
         } else {
           //console.log(user);
-          User.findOneAndUpdate({login_id: userId}, {last_login_date: Date.now()}, {new: false}, 
+          let token = randtoken.generate(16).toString();
+          User.findOneAndUpdate({login_id: userId},  {login_token: token, last_login_date: Date.now()}, {new: false}, 
           function(err, result) {
-            if(err)
+            if(err) {
               res.send(err);
-            console.log(result);
+            } else {
+              console.log(result);
+            }
           });
-          res.json({user_login: req.params.userId, last_login_date: user.last_login_date});
+          res.json({user_login: userId, login_token: token, last_login_date: user.last_login_date});
         }
       } else {
-        res.json({result: 'Login fail!'});
+       res.json({result: 'Login fail!'});
       }
     });
   };
@@ -70,19 +75,20 @@ var mongoose = require('mongoose'),
     let activateCode = req.body.activateCode;
     console.log(userId + '|' + userPasswd + '|' + activateCode);
     
-    userPasswd = MD5(userPasswd);
+    userPasswd = MD5(userPasswd).toString();
     User.findOne({login_id: userId, password: userPasswd, activation_token: activateCode, status: 'pending'}, function(err, user) {
       if (err) {
         res.send(err);
       }
       if (user != null) {
         //console.log(user);
-        User.findOneAndUpdate({login_id: userId}, {status: 'normal', ast_login_date: Date.now()}, {new: false}, 
+        let token = randtoken.generate(16).toString();
+        User.findOneAndUpdate({login_id: userId}, {status: 'normal', login_token: token, last_login_date: Date.now()}, {new: false}, 
           function(err, result) {
             if(err)
               res.send(err);
             console.log(result);
-            res.json({user_login: req.params.userId, last_login_date: user.last_login_date});
+            res.json({user_login: userId, login_token: token, last_login_date: user.last_login_date});
           });
       } else {
         res.json({result: 'Activate fail!'});
@@ -96,15 +102,15 @@ var mongoose = require('mongoose'),
     let newPasswd = req.body.newPassword;
     console.log(userId + '|' + userPasswd + '|' + newPasswd);
     
-    userPasswd = MD5(userPasswd);
-    newPassword = MD5(newPassword);
+    userPasswd = MD5(userPasswd).toString();
+    newPasswd = MD5(newPasswd).toString();
     User.findOne({login_id: userId, password: userPasswd, status: 'normal'}, function(err, user) {
       if (err) {
         res.send(err);
       }
       if (user != null) {
         //console.log(user);
-        User.findOneAndUpdate({login_id: userId}, {password: newPasswd, ast_login_date: Date.now()}, {new: false}, 
+        User.findOneAndUpdate({login_id: userId}, {password: newPasswd, last_login_date: Date.now()}, {new: false}, 
           function(err, result) {
             if(err)
               res.send(err);
@@ -140,3 +146,4 @@ exports.dest_info = function(req, res) {
     }
   });
 };
+
