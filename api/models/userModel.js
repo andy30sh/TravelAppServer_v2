@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const randtoken = require('rand-token');
 
+// Users collections
+
 var UserSchema = new Schema({
   first_name: {
     type: String,
@@ -53,3 +55,49 @@ var UserSchema = new Schema({
 });
 
 module.exports = mongoose.model('Users', UserSchema);
+
+// Dests collections
+var DestSchema = new Schema({
+  dest_code: {    // City code
+    type: String,
+    required: 'no dest code!',
+    unique: true
+  },
+  dest_name: {    // Australian cities
+    type: String,
+    required: 'no dest name!'
+  },
+  dest_region: {  // Australian states
+    type: String,
+    required: 'no dest region!',
+    unique: true
+  }
+});
+
+module.exports = mongoose.model('Dests', DestSchema);
+
+var DestInfoSchema = new Schema({
+  dest_code: {    // City code
+    type: String,
+    required: 'no dest code!',
+    unique: true
+  },
+  covid_status: {
+    type: String,
+    default: 'no information'
+  },
+  boarder_control: {
+    type: String,
+    default: 'no information'
+  },
+  Quarantine_info: {
+    type: String,
+    default: 'no information'
+  },
+  last_update_date: {
+    type: Date,
+    default: Date.now
+  },
+});
+
+module.exports = mongoose.model('DestInfos', DestInfoSchema);

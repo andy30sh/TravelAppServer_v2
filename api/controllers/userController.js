@@ -3,13 +3,15 @@
 var MD5 = require('crypto-js/md5'); // hash password
 
 var mongoose = require('mongoose'),
-    User = mongoose.model('Users');
+    User = mongoose.model('Users'),
+    Dest = mongoose.model('Dests'),
+    DestInfo = mongoose.model('DestInfos');
 
  // =============== User ======================
 
   exports.list_all_users = function(req, res) {
     User.find({}, function(err, user) {
-      if (err)
+      if (err) 
         res.send(err);
       console.log("list all users");
       res.json(user);
@@ -19,12 +21,16 @@ var mongoose = require('mongoose'),
   exports.user_create = function(req, res) {
     console.log(req.body);
     var new_user = new User(req.body);
+
+    new_user.password = MD5(new_user.password);
     new_user.save(function(err, user) {
-      if (err)
+      if (err) {
         res.send(err);
-      console.log("create new user");
-      console.log(new_user);
-      res.json({user_login: new_user.user_login, created_date: new_user.created_date});
+      } else {
+        console.log("created new user");
+        console.log(new_user);
+        res.json({user_login: new_user.user_login, created_date: new_user.created_date});
+      }
     });
   };
 
@@ -34,6 +40,7 @@ var mongoose = require('mongoose'),
     let userPasswd = req.body.password;
     console.log(userId + '|' + userPasswd);
 
+    userPasswd = MD5(userPasswd);
     User.findOne({login_id: userId, password: userPasswd}, function(err, user) {
       if (err) {
         res.send(err);
@@ -63,6 +70,7 @@ var mongoose = require('mongoose'),
     let activateCode = req.body.activateCode;
     console.log(userId + '|' + userPasswd + '|' + activateCode);
     
+    userPasswd = MD5(userPasswd);
     User.findOne({login_id: userId, password: userPasswd, activation_token: activateCode, status: 'pending'}, function(err, user) {
       if (err) {
         res.send(err);
@@ -88,6 +96,8 @@ var mongoose = require('mongoose'),
     let newPasswd = req.body.newPassword;
     console.log(userId + '|' + userPasswd + '|' + newPasswd);
     
+    userPasswd = MD5(userPasswd);
+    newPassword = MD5(newPassword);
     User.findOne({login_id: userId, password: userPasswd, status: 'normal'}, function(err, user) {
       if (err) {
         res.send(err);
@@ -106,3 +116,27 @@ var mongoose = require('mongoose'),
       }
     });
   };
+
+// =============== Dest ======================
+
+exports.dest_list = function(req, res) {
+  Dest.find({}, function(err, user) {
+    if (err)
+      res.send(err);
+    console.log("dest list");
+    res.json(user);
+  });
+};
+
+exports.dest_info = function(req, res) {
+  let destCode = req.body.destCode;
+  console.log(destCode);
+  DestInfo.find({dest_code: destCode}, function(err, user) {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log("dest_info");
+      res.json(user);
+    }
+  });
+};

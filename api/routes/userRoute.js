@@ -18,4 +18,10 @@ module.exports = function(app) {
   app.route('/user/password')
     .post(user.user_change_password)
 
+  app.route('/dest/list')
+    .get(user.dest_list)
+
+  app.route('/dest/info')
+    .get(user.dest_info)
+
 };
