@@ -1,5 +1,9 @@
 'use strict';
 
+const mailac = require('../../mailac.js'); // import gmail account 
+const mailFrom = 'noreply@travlapp.com';
+var nodemailer = require('nodemailer');
+
 var MD5 = require('crypto-js/md5'); // hash password
 const randtoken = require('rand-token');
 
@@ -30,6 +34,24 @@ var mongoose = require('mongoose'),
       } else {
         console.log("created new user");
         console.log(new_user);
+        // Send mail <================
+        console.log("send email");
+        console.log(mailac); 
+        var transporter = nodemailer.createTransport(mailac);
+        var mailOptions = {
+          from: mailFrom,
+          to: new_user.email,
+          subject: 'Travel App New Registration',
+          text: 'Your activation code of Account Registration: ' + result.activateCode
+        };
+        transporter.sendMail(mailOptions, function(err, info) {
+          if(err) {
+            console.log(err);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+        // End send mail
         res.json({user_login: new_user.login_id, created_date: new_user.created_date});
       }
     });
@@ -143,6 +165,24 @@ var mongoose = require('mongoose'),
             if(err) {
               res.send(err);
             } else {
+              // Send mail <================
+              console.log("send email");
+              console.log(mailac); 
+              var transporter = nodemailer.createTransport(mailac);
+              var mailOptions = {
+                from: mailFrom,
+                to: result.email,
+                subject: 'Travel App Password Reset',
+                text: 'Your activation code of reset password request: ' + result.activateCode
+              };
+              transporter.sendMail(mailOptions, function(err, info) {
+                if(err) {
+                  console.log(err);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
+              // End send mail
               console.log(result);
               res.json({user_login: userId, status: result.status});
             }
