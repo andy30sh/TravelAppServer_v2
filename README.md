@@ -231,60 +231,92 @@ return (JSON) {user_login, login_token, last_login_date}
 Fail: 
 return error message e.g. Change password fail!
 
-8. RESTful API – Destination list
-Path:
-/dest/list     e.g,. http://localhost:8088/dest/list
-Method (POST/GET):
-POST (x-www-form-urlencoded)
-Request Parameters:
-•token (mandatory)
-Response Result Success:  
-return (JSON) {user_login, login_token, last_login_date}
-[
-    {
-        "dest_code": "syd",
-        "dest_name": "Sydney",
-        "dest_region": "NSW"
-    },
-    {
-        "dest_code": "nst",
-        "dest_name": "Newcastle",
-        "dest_region": "NSW"
-    },
-    {
-        "dest_code": "ade",
-        "dest_name": "Adelaide",
-        "dest_region": "SA"
-    },
-    {
-        "dest_code": "vch",
-        "dest_name": "Victor Harbor",
-        "dest_region": "SA"
-    }
-]
-Fail:  
+## 8. RESTful API – Destination list  
+
+### Path  
+
+* /dest/list  
+e.g,. <http://localhost:8088/dest/list?loginToken=1234>  
+
+### Method (POST/GET)  
+
+* GET  
+
+### Request Parameters
+
+* loginToken (mandatory)  
+
+### Response Result  
+
+* Success:  
+return (JSON) {user_login, login_token, last_login_date}  
+
+    ```
+    [
+        {
+            "dest_code": "syd",
+            "dest_name": "Sydney",
+            "dest_region": "NSW"
+        },
+        {
+            "dest_code": "nst",
+            "dest_name": "Newcastle",
+            "dest_region": "NSW"
+        },
+        {
+            "dest_code": "ade",
+            "dest_name": "Adelaide",
+            "dest_region": "SA"
+        },
+        {
+            "dest_code": "vch",
+            "dest_name": "Victor Harbor",
+            "dest_region": "SA"
+        }
+    ]
+
+    ```
+
+* Fail:  
 return error message e.g. Unauthorised access!
 
-9. RESTful API – Destination information  
-Path:
-/dest/info     e.g,. http://localhost:8088/dest/info
-Method (POST/GET):
-POST (x-www-form-urlencoded)
-Request Parameters:
-•token (mandatory)
-•destCode (mandatory)
-Response Result Success:  
-return (JSON) {user_login, login_token, last_login_date}
-{
-  "dest_code": "ade",
-  "border_status": "Opening",
-  "covid_status": "Low",
-  "lockdown_status": "None",
-  "covid_dashboard_link": "googel.com/covid_dashboard_link1",
-  "Activity_restriction_link": "googel.com/Activity_restriction_link1",
-  "travel_restriction_link": "googel.com/travel_restriction_link1",
-  "last_update_date": "2021-10-22T10:24:51.850Z"
-  }
-}
-Fail:  
-return error message e.g. Unauthorised access! or Dest info not found!
+## 9. RESTful API – Destination information  
+
+### Path
+
+* /dest/info  
+e.g,. http://localhost:8088/dest/info
+
+### Method (POST/GET)  
+
+* POST (x-www-form-urlencoded)
+
+### Request Parameters
+
+* loginToken (mandatory)
+* destCode (mandatory)
+
+### Response Result  
+
+* Success:  
+return (JSON) {user_login, login_token, last_login_date}  
+    ```
+    [
+        {
+            "_id": "617294f3e25dbbd06c580890",
+            "dest_code": "2",
+            "border_status": "border2",
+            "covid_status": "covid_status2",
+            "lockdown_status": "lockdown_status2",
+            "covid_dashboard_link": "googel.com/covid_dashboard_link2",
+            "Activity_restriction_link": "googel.com/Activity_restriction_link2",
+            "travel_restriction_link": "googel.com/travel_restriction_link2",
+            "last_update_date": "2021-10-22T10:39:47.030Z",
+            "__v": 0
+        }
+    ]
+
+    ```
+
+* Fail:  
+    return error message e.g. Unauthorised access! or Dest info not found!
