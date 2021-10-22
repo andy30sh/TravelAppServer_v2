@@ -25,13 +25,22 @@ Development Tools:
 2. Postman
 
 Installing:
-1. git clone https://github.com/andy30sh/TravelAppServer_v2.git
-2. config mailac.js
+1. create MongoDB schema
+    1.1. Connect to MongoDB by client tools e.g. 'MongoDB for VS code'
+    1.2. Create a new Database with name 'TravelApp'
+    1.3. Create a Collections in 'TravelApp' Database with name 'users'
+    1.4. Create a Collections in 'TravelApp' Database with name 'dests'
+    1.5. Create a Collections in 'TravelApp' Database with name 'destinfos'
+    Remark: The default MongoDB is installed in local and without login id and password,
+    if you setup is different, update the proper connection string in 'server.js' file
+    e.g. mongoose.connect('mongodb://id:pwd@host:port/TravelApp'); 
+2. git clone https://github.com/andy30sh/TravelAppServer_v2.git
+3. config mailac.js
     2.1. Open mailac.js file with code editor
     2.2. Edit the SMTP server config, e.g. for your own Google mail account
     2.3. Save the file
-3. npm install
-4. Initial database content (Optional)
+4. npm install
+5. Initial database content (Optional)
     4.1. Open server.js file with code editor
     4.2. Change the value of 'isDbInit' to 'true' e.g. 'const isDbInit = true;'
     4.3. Save the file
@@ -225,41 +234,33 @@ return error message e.g. Change password fail!
 
 8.	RESTful API – Destination list
 Path:
-/dest/lise     e.g,. http://localhost:8088/dest/list?token=I68CPJLhD1qPzf3m
+/dest/lise     e.g,. http://localhost:8088/dest/list
 Method (POST/GET):
-GET
+POST (x-www-form-urlencoded)
 Request Parameters:
 •	token (mandatory)
 Response Result	Success: 
 return (JSON) {user_login, login_token, last_login_date}
 [
     {
-        "_id": "61729173c6019960f924d431",
         "dest_code": "syd",
         "dest_name": "Sydney",
-        "dest_region": "NSW",
-        "__v": 0
+        "dest_region": "NSW"
     },
     {
-        "_id": "61729173c6019960se54d431",
         "dest_code": "nst",
         "dest_name": "Newcastle",
-        "dest_region": "NSW",
-        "__v": 0
+        "dest_region": "NSW"
     },
     {
-        "_id": "61729173c6019960f924d432",
         "dest_code": "ade",
         "dest_name": "Adelaide",
-        "dest_region": "SA",
-        "__v": 0
+        "dest_region": "SA"
     },
     {
-        "_id": "61729we3c6019960f9247542",
         "dest_code": "vch",
         "dest_name": "Victor Harbor",
-        "dest_region": "SA",
-        "__v": 0
+        "dest_region": "SA"
     }
 ]
 Fail: 
@@ -268,18 +269,15 @@ return error message e.g. Unauthorised access!
 
 9.	RESTful API – Destination information 
 Path:
-/dest/info     e.g,. http://localhost:8088/dest/list?token=I68CPJLhD1qPzf3m&destCode=ade
+/dest/info     e.g,. http://localhost:8088/dest/list
 Method (POST/GET):
-GET
+POST (x-www-form-urlencoded)
 Request Parameters:
 •	token (mandatory)
 •	destCode (mandatory)
 Response Result	Success: 
 return (JSON) {user_login, login_token, last_login_date}
 {
-  "_id": {
-    "$oid": "61729173c6019960f924d435"
-  },
   "dest_code": "ade",
   "border_status": "Opening",
   "covid_status": "Low",
@@ -287,10 +285,8 @@ return (JSON) {user_login, login_token, last_login_date}
   "covid_dashboard_link": "googel.com/covid_dashboard_link1",
   "Activity_restriction_link": "googel.com/Activity_restriction_link1",
   "travel_restriction_link": "googel.com/travel_restriction_link1",
-  "last_update_date": {
-    "$date": "2021-10-22T10:24:51.850Z"
-  },
-  "__v": 0
+  "last_update_date": "2021-10-22T10:24:51.850Z"
+  }
 }
 Fail: 
 return error message e.g. Unauthorised access! or Dest info not found!
