@@ -220,3 +220,21 @@ var mongoose = require('mongoose'),
       }
     });
   };
+
+  exports.check_login = function(token, callback){
+    if(token === ''){
+      callback(false);
+      return;
+    }
+    User.findOne({login_token: token}, function(err, result) {
+      if(result) {
+        console.log('find ' + token);
+        console.log(result);
+        callback(true);
+      } else {
+        console.log('not find ' + token);
+        console.log(result);
+        callback(false);
+      }
+    });
+  }
