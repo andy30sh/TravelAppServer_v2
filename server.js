@@ -1,4 +1,4 @@
-const isDbInit = true;   // true to import initial database content
+const isDbInit = false;   // true to import initial database content
 
 var express = require('express'),
     app = express(),
