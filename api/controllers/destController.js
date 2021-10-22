@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     user = require('../controllers/userController');
 
 exports.dest_list = function(req, res) {
-    let loginToken = req.query.loginToken;
+    let loginToken = req.body.loginToken;
 
     user.check_login(loginToken, function(result){
         if(result === true){

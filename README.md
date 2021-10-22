@@ -236,11 +236,11 @@ return error message e.g. Change password fail!
 ### Path  
 
 * /dest/list  
-e.g,. <http://localhost:8088/dest/list?loginToken=1234>  
+e.g,. <http://localhost:8088/dest/list>  
 
 ### Method (POST/GET)  
 
-* GET  
+* POST (x-www-form-urlencoded)  
 
 ### Request Parameters
 
@@ -249,7 +249,7 @@ e.g,. <http://localhost:8088/dest/list?loginToken=1234>
 ### Response Result  
 
 * Success:  
-return (JSON) {user_login, login_token, last_login_date}  
+return (JSON) {dest_code, dest_name, dest_region}  
 
     ```
     [
@@ -299,7 +299,7 @@ e.g,. http://localhost:8088/dest/info
 ### Response Result  
 
 * Success:  
-return (JSON) {user_login, login_token, last_login_date}  
+return (JSON)  
     ```
     [
         {

@@ -4,7 +4,7 @@ module.exports = function(app) {
 
   //Dest
   app.route('/dest/list')
-    .get(dest.dest_list);
+    .post(dest.dest_list);
 
   app.route('/dest/info')
     .post(dest.dest_info);
