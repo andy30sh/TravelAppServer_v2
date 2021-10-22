@@ -23,12 +23,4 @@ module.exports = function(app) {
 
   app.route('/user/reset')
     .post(user.reset_password)
-
-  // Dest
-  app.route('/dest/list')
-    .get(user.dest_list)
-
-  app.route('/dest/info')
-    .get(user.dest_info)
-
 };

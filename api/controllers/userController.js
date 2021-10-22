@@ -8,9 +8,9 @@ var MD5 = require('crypto-js/md5'); // hash password
 const randtoken = require('rand-token');
 
 var mongoose = require('mongoose'),
-    User = mongoose.model('Users'),
-    Dest = mongoose.model('Dests'),
-    DestInfo = mongoose.model('DestInfos');
+    User = mongoose.model('Users');
+    // Dest = mongoose.model('Dests'),
+    // DestInfo = mongoose.model('DestInfos');
 
  // =============== User ======================
 
@@ -221,28 +221,3 @@ var mongoose = require('mongoose'),
       }
     });
   };
-
-// =============== Dest ======================
-
-exports.dest_list = function(req, res) {
-  Dest.find({}, function(err, user) {
-    if (err)
-      res.send(err);
-    console.log("dest list");
-    res.json(user);
-  });
-};
-
-exports.dest_info = function(req, res) {
-  let destCode = req.body.destCode;
-  console.log(destCode);
-  DestInfo.find({dest_code: destCode}, function(err, user) {
-    if (err) {
-      res.send(err);
-    } else {
-      console.log("dest_info");
-      res.json(user);
-    }
-  });
-};
-
