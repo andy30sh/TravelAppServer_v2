@@ -231,15 +231,14 @@ return (JSON) {user_login, login_token, last_login_date}
 Fail: 
 return error message e.g. Change password fail!
 
-
-8.	RESTful API – Destination list
+8. RESTful API – Destination list
 Path:
-/dest/lise     e.g,. http://localhost:8088/dest/list
+/dest/list     e.g,. http://localhost:8088/dest/list
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
-•	token (mandatory)
-Response Result	Success: 
+•token (mandatory)
+Response Result Success:  
 return (JSON) {user_login, login_token, last_login_date}
 [
     {
@@ -263,19 +262,18 @@ return (JSON) {user_login, login_token, last_login_date}
         "dest_region": "SA"
     }
 ]
-Fail: 
+Fail:  
 return error message e.g. Unauthorised access!
 
-
-9.	RESTful API – Destination information 
+9. RESTful API – Destination information  
 Path:
-/dest/info     e.g,. http://localhost:8088/dest/list
+/dest/info     e.g,. http://localhost:8088/dest/info
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
-•	token (mandatory)
-•	destCode (mandatory)
-Response Result	Success: 
+•token (mandatory)
+•destCode (mandatory)
+Response Result Success:  
 return (JSON) {user_login, login_token, last_login_date}
 {
   "dest_code": "ade",
@@ -288,5 +286,5 @@ return (JSON) {user_login, login_token, last_login_date}
   "last_update_date": "2021-10-22T10:24:51.850Z"
   }
 }
-Fail: 
+Fail:  
 return error message e.g. Unauthorised access! or Dest info not found!
