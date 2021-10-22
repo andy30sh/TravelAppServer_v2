@@ -9,8 +9,6 @@ const randtoken = require('rand-token');
 
 var mongoose = require('mongoose'),
     User = mongoose.model('Users');
-    // Dest = mongoose.model('Dests'),
-    // DestInfo = mongoose.model('DestInfos');
 
  // =============== User ======================
 

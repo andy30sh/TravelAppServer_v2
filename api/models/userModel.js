@@ -29,7 +29,7 @@ var UserSchema = new Schema({
   },
   login_token: {
     type: String,
-    default: ''
+    default: 'xxx'
   },
   activation_token: {
     type: String,

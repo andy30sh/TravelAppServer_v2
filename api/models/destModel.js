@@ -16,8 +16,7 @@ var DestSchema = new Schema({
   },
   dest_region: {  // Australian states
     type: String,
-    required: 'no dest region!',
-    unique: true
+    required: 'no dest region!'
   }
 });
 
