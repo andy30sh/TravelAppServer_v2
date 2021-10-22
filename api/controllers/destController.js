@@ -6,11 +6,20 @@ var mongoose = require('mongoose'),
     user = require('../controllers/userController');
 
 exports.dest_list = function(req, res) {
-    Dest.find({}, function(err, user) {
-        if (err)
-        res.send(err);
-        console.log("dest list");
-        res.json(user);
+    let loginToken = req.query.loginToken;
+
+    user.check_login(loginToken, function(result){
+        if(result === true){
+            Dest.find({}, function(err, user) {
+                if (err)
+                res.send(err);
+                console.log("dest list");
+                res.json(user);
+            });
+        }else{
+            console.log(result);
+            res.json({result: 'loginToken is wrong!'});
+        }
     });
 };
 
