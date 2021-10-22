@@ -27,21 +27,30 @@ Development Tools:
 Installing:
 1. git clone https://github.com/andy30sh/TravelAppServer_v2.git
 2. config mailac.js
-    2.1 Open mailac.js file with code editor
-    2.2 Edit the SMTP server config, e.g. for your own Google mail account
-    2.3 Save the file
+    2.1. Open mailac.js file with code editor
+    2.2. Edit the SMTP server config, e.g. for your own Google mail account
+    2.3. Save the file
 3. npm install
-4. npm run start
+4. Initial database content (Optional)
+    4.1. Open server.js file with code editor
+    4.2. Change the value of 'isDbInit' to 'true' e.g. 'const isDbInit = true;'
+    4.3. Save the file
+    4.4. Execute app by run command 'npm run start'
+    4.5. After execute complete (message will shown in console)
+    4.6. Revert the value of 'isDbInit' to 'false', then save file
+
+Executing:
+1. npm run start
 
 Testing:
 1. When you see the 'Travel App Server RESTful API server started on: 8088' message in console mean server ready for accept connection from port 8088
 2. Use Postman program as the RESTful client
-    2.1 Enter URL and select the method (GET or POST) e.g. http://localhost:8088/user/forget (POST)
-    2.2 Click 'Body' tag and select 'x-www-form-urlencoded' tag
-    2.3 Enter 'Key' and 'Value' for request parameters
-    2.4 Click 'Send' to submit the request
-    2.5 Get the response result in bottom session
-    2.6 Click 'Save' to store and reuse the request
+    2.1. Enter URL and select the method (GET or POST) e.g. http://localhost:8088/user/forget (POST)
+    2.2. Click 'Body' tag and select 'x-www-form-urlencoded' tag
+    2.3. Enter 'Key' and 'Value' for request parameters
+    2.4. Click 'Send' to submit the request
+    2.5. Get the response result in bottom session
+    2.6. Click 'Save' to store and reuse the request
 
 
 RESTful APIs:

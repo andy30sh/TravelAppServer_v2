@@ -50,7 +50,7 @@ var mongoose = require('mongoose'),
           }
         });
         // End send mail
-        res.json({user_login: new_user.login_id, created_date: new_user.created_date});
+        res.json({user_login: user.login_id, created_date: user.created_date});
       }
     });
   };
@@ -73,6 +73,7 @@ var mongoose = require('mongoose'),
         } else {
           //console.log(user);
           let token = randtoken.generate(16).toString();
+          console.log(token);
           User.findOneAndUpdate({login_id: userId},  {login_token: token, last_login_date: Date.now()}, {new: false}, 
           function(err, result) {
             if(err) {
@@ -81,7 +82,7 @@ var mongoose = require('mongoose'),
               console.log(result);
             }
           });
-          res.json({user_login: userId, login_token: token, last_login_date: result.last_login_date});
+          res.json({user_login: userId, login_token: token, last_login_date: user.last_login_date});
         }
       } else {
        res.json({result: 'Login fail!'});

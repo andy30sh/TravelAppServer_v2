@@ -1,0 +1,62 @@
+[
+    {
+        "first_name": "David",
+        "last_name": "Li",
+        "email": "david.li@myemail.com",
+        "login_id": "davidli",
+        "password": "cb28e00ef51374b841fb5c189b2b91c9",
+        "login_token": "Okx8eH4s0guLvyWb",
+        "status": [
+            "normal"
+        ],
+        "activation_token": "xxx"
+    },
+    {
+        "first_name": "Peter",
+        "last_name": "Wood",
+        "email": "peter.wood@myemail.com",
+        "login_id": "peterw",
+        "password": "cb28e00ef51374b841fb5c189b2b91c9",
+        "login_token": "xxx",
+        "status": [
+            "pending"
+        ],
+        "activation_token": "hYpDk424dXz1ktMt"
+    },
+    {
+        "first_name": "Tommy",
+        "last_name": "Lukcy",
+        "email": "tommy.lucky@myemail.com",
+        "login_id": "tommyl",
+        "password": "cb28e00ef51374b841fb5c189b2b91c9",
+        "login_token": "xxx",
+        "status": [
+            "pending"
+        ],
+        "activation_token": "vshmzwz5WyOrD9OK"
+    },
+    {
+        "first_name": "Alice",
+        "last_name": "Green",
+        "email": "alice.green@myemail.com",
+        "login_id": "aliceg",
+        "password": "cb28e00ef51374b841fb5c189b2b91c9",
+        "login_token": "I68CPJLhD1qPzf3m",
+        "status": [
+            "normal"
+        ],
+        "activation_token": "xxx"
+    },
+    {
+        "first_name": "Andy",
+        "last_name": "Yuen",
+        "email": "andy.yuen.work@gmail.com",
+        "login_id": "andyy",
+        "password": "cb28e00ef51374b841fb5c189b2b91c9",
+        "login_token": "1jRNvQKUPx4AXYyb",
+        "status": [
+            "normal"
+        ],
+        "activation_token": "xxx"
+    }
+]
