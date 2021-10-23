@@ -1,4 +1,4 @@
-Project Title - SEE Travel App Server
+# Project Title - SEE Travel App Server
 
 This project aim to build up a backend server serve the travel mobile application with RESTful APIs outlined:
 
@@ -12,21 +12,25 @@ This project aim to build up a backend server serve the travel mobile applicatio
 8. Get destination covid status and information
 9. Get all user accounts (Development test only)
 
-Getting Started
+# Getting Started
 
-Dependencies:
+## Dependencies:
 
 1. Operation system: Windows, MacOS or Linux
 2. Application: Node.js version 14
+    https://nodejs.org/en/download/
 3. Database: MongoDB Community Server
+    https://www.mongodb.com/try/download/community
 4. SMTP server: any accessable SMTP server e.g. Google Mail
 
-Development Tools:
+## Development Tools:
 
-1. Visual Studio Code
-2. Postman
+1. **Visual Studio Code**
+    https://code.visualstudio.com/download
+2. **Postman**
+    https://www.postman.com/downloads/
 
-Installing:
+## Installing:
 
 1. create MongoDB schema
     1.1. Connect to MongoDB by client tools e.g. 'MongoDB for VS code'
@@ -34,9 +38,9 @@ Installing:
     1.3. Create a Collections in 'TravelApp' Database with name 'users'
     1.4. Create a Collections in 'TravelApp' Database with name 'dests'
     1.5. Create a Collections in 'TravelApp' Database with name 'destinfos'
-    Remark: The default MongoDB is installed in local and without login id and password,
-    if you setup is different, update the proper connection string in 'server.js' file
-    e.g. mongoose.connect('mongodb://id:pwd@host:port/TravelApp');
+    *Remark: The default MongoDB is installed in local and without login id and password,*
+    *if you setup is different, update the proper connection string in 'server.js' file*
+    *e.g. mongoose.connect('mongodb://id:pwd@host:port/TravelApp');*
 2. git clone <https://github.com/andy30sh/TravelAppServer_v2.git>
 3. config mailac.js
     2.1. Open mailac.js file with code editor
@@ -50,15 +54,15 @@ Installing:
     4.4. Execute app by run command 'npm run start'
     4.5. After execute complete (message will shown in console)
     4.6. Revert the value of 'isDbInit' to 'false', then save file
-    Remark: all users with the default password as 'password123456'
+    *Remark: all users with the default password as 'password123456'*
 
-Executing:
+## Executing:
 
 1. npm run start  
     Travel App Server RESTful API HTTPs server started on: 8443  
     e.g. https://localhost:8443/
 
-Testing:
+## Testing:
 
 1. When you see the 'Travel App Server RESTful API server started on: 8088' message in console mean server ready for accept connection from port 8088
 2. Use Postman program as the RESTful client
@@ -70,6 +74,14 @@ Testing:
     2.6. Click 'Save' to store and reuse the request
 
 # RESTful APIs:
+
+## Postman - as API client
+1. Sample 1:
+![Image of Postman 1](./_sample/PostmanSmaple1.png)
+
+2. Sample 2:
+![Image of Postman 1](./_sample/PostmanSmaple2.png)
+
 
 ## 1. RESTful API – Create new user  
 
