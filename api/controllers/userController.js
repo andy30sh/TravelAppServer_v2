@@ -18,7 +18,7 @@ var mongoose = require('mongoose'),
         res.send(err);
       console.log("list all users");
       res.json(user);
-    });
+    }); 
   };
  
   exports.user_create = function(req, res) {
@@ -40,7 +40,7 @@ var mongoose = require('mongoose'),
           from: mailFrom,
           to: new_user.email,
           subject: 'Travel App New Registration',
-          text: 'Your activation code of Account Registration: ' + result.activateCode
+          text: 'Your activation code of Account Registration: ' + user.activateCode
         };
         transporter.sendMail(mailOptions, function(err, info) {
           if(err) {

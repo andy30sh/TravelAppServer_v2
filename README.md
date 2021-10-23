@@ -51,11 +51,15 @@ Installing:
 
 Executing:
 1. npm run start
+Travel App Server RESTful API HTTP server started on: 8088
+e.g. http://localhost:8088/
+Travel App Server RESTful API HTTPs server started on: 8443
+e.g. https://localhost:8443/
 
 Testing:
 1. When you see the 'Travel App Server RESTful API server started on: 8088' message in console mean server ready for accept connection from port 8088
 2. Use Postman program as the RESTful client
-    2.1. Enter URL and select the method (GET or POST) e.g. http://localhost:8088/user/forget (POST)
+    2.1. Enter URL and select the method (GET or POST) e.g. https://localhost:8088/user/forget (POST)
     2.2. Click 'Body' tag and select 'x-www-form-urlencoded' tag
     2.3. Enter 'Key' and 'Value' for request parameters
     2.4. Click 'Send' to submit the request
@@ -67,7 +71,7 @@ RESTful APIs:
 
 1.	RESTful API – Create new user
 Path:	
-/user/create    e.g,. http://localhost:8088/user/create
+/user/create    e.g,. https://localhost:8443/user/create
 Method (POST/GET):	
 POST (x-www-form-urlencoded)
 Request Parameters:	
@@ -89,7 +93,7 @@ return error message e.g. Activate fail!
 
 2.	RESTful API – List all users (Development test only)
 Path:	
-/user   e.g,. http://localhost:8088/user
+/user   e.g,. https://localhost:8443/user
 Method (POST/GET):
 GET
 Request Parameters:
@@ -136,7 +140,7 @@ return error message
 
 3.	RESTful API – user account activate (Email verification)
 Path:
-/user/activate  e.g,. http://localhost:8088/user/activate
+/user/activate  e.g,. https://localhost:8443/user/activate
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
@@ -155,7 +159,7 @@ return error message e.g. duplicate login_id
 
 4.	RESTful API – User login
 Path:
-/user/login     e.g,. http://localhost:8088/user/login
+/user/login     e.g,. https://localhost:8443/user/login
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
@@ -174,7 +178,7 @@ return error message e.g. Account not active!; Login fail!
 
 5.	RESTful API – Change user password
 Path:
-/user/password      e.g,. http://localhost:8088/user/password
+/user/password      e.g,. https://localhost:8443/user/password
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
@@ -194,7 +198,7 @@ return error message e.g. Incorrect login ID and email!
 
 6.	RESTful API – Forget user password
 Path:
-/user/forget    e.g,. http://localhost:8088/user/forget
+/user/forget    e.g,. https://localhost:8443/user/forget
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
@@ -214,7 +218,7 @@ return error message e.g. Change password fail!
 
 7.	RESTful API – Reset user password
 Path:
-/user/reset     e.g,. http://localhost:8088/user/reset
+/user/reset     e.g,. https://localhost:8443/user/reset
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
@@ -234,7 +238,7 @@ return error message e.g. Change password fail!
 
 8.	RESTful API – Destination list
 Path:
-/dest/lise     e.g,. http://localhost:8088/dest/list
+/dest/lise     e.g,. https://localhost:8443/dest/list
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
@@ -269,7 +273,7 @@ return error message e.g. Unauthorised access!
 
 9.	RESTful API – Destination information 
 Path:
-/dest/info     e.g,. http://localhost:8088/dest/list
+/dest/info     e.g,. https://localhost:8443/dest/list
 Method (POST/GET):
 POST (x-www-form-urlencoded)
 Request Parameters:
