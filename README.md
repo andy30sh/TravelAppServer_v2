@@ -77,10 +77,10 @@ This project aim to build up a backend server serve the travel mobile applicatio
 
 ## Postman - as API client
 1. Sample 1:
-![Image of Postman 1](./_sample/PostmanSmaple1.png)
+![Image of Postman 1](https://github.com/andy30sh/TravelAppServer_v2/blob/master/_sample/PostmanSample1.png)
 
 2. Sample 2:
-![Image of Postman 1](./_sample/PostmanSmaple2.png)
+![Image of Postman 1](https://github.com/andy30sh/TravelAppServer_v2/blob/master/_sample/PostmanSample2.png)
 
 
 ## 1. RESTful API – Create new user  
