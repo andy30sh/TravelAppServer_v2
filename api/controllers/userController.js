@@ -157,7 +157,7 @@ var mongoose = require('mongoose'),
         res.send(err);
       }
       if (user != null) {
-        //console.log(user);
+        console.log(user);
         let token = randtoken.generate(16).toString();
         User.findOneAndUpdate({login_id: userId}, {activation_token: token}, {new: false}, 
           function(err, result) {

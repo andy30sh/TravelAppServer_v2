@@ -32,7 +32,7 @@ This project aim to build up a backend server serve the travel mobile applicatio
 
 ## Installing:
 
-1. create MongoDB schema
+1. Create MongoDB schema
     1.1. Connect to MongoDB by client tools e.g. 'MongoDB for VS code'
     1.2. Create a new Database with name 'TravelApp'
     1.3. Create a Collections in 'TravelApp' Database with name 'users'
@@ -42,7 +42,7 @@ This project aim to build up a backend server serve the travel mobile applicatio
     *if you setup is different, update the proper connection string in 'server.js' file*
     *e.g. mongoose.connect('mongodb://id:pwd@host:port/TravelApp');*
 2. git clone <https://github.com/andy30sh/TravelAppServer_v2.git>
-3. config mailac.js
+3. Config mailac.js
     2.1. Open mailac.js file with code editor
     2.2. Edit the SMTP server config, e.g. for your own Google mail account
     2.3. Save the file
@@ -58,9 +58,10 @@ This project aim to build up a backend server serve the travel mobile applicatio
 
 ## Executing:
 
-1. npm run start  
-    Travel App Server RESTful API HTTPs server started on: 8443  
-    e.g. https://localhost:8443/
+1. npm run start
+Console message:  
+*Travel App Server RESTful API HTTP server started on: 8088  e.g. http://localhost:8088/*
+*Travel App Server RESTful API HTTPs server started on: 8443  e.g. https://localhost:8443/*
 
 ## Testing:
 
@@ -432,3 +433,5 @@ return (JSON)
 
 * Fail:  
     return error message e.g. Unauthorised access! or Dest info not found!
+
+
